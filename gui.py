@@ -13,41 +13,43 @@ class FleetManagementApp:
         self.fms = FleetManagementSystem()
 
         self.create_widgets()
-
+    
     def create_widgets(self):
-        self.title_label = tk.Label(self.root, text="F l e e t   M a n a g e m e n t   S y s t e m ", font=("Helvetica", 40), bg='grey', pady=20)
-        self.title_label.grid(row=0, column=0, columnspan=2, pady=10)
+        self.title_label = tk.Label(self.root, text="Fleet Management System", font=("Helvetica", 40), bg='grey', pady=20)
+        self.title_label.grid(row=0, column=0, columnspan=3, pady=10)
 
-        # Center the title by configuring the grid columns
-        self.root.grid_columnconfigure(0, weight=1)
-        self.root.grid_columnconfigure(1, weight=1)
+        # Configure grid columns to expand
+        for i in range(3):
+            self.root.grid_columnconfigure(i, weight=1)
+        self.root.grid_rowconfigure(1, weight=1)
 
+        # Arrange buttons in a 3x3 grid
         self.add_vehicle_button = tk.Button(self.root, text="Add Vehicle", command=self.add_vehicle, bg='lightgrey')
-        self.add_vehicle_button.grid(row=1, column=1, pady=5, sticky='e')
+        self.add_vehicle_button.grid(row=1, column=0, padx=10, pady=10)
 
         self.remove_vehicle_button = tk.Button(self.root, text="Remove Vehicle", command=self.remove_vehicle, bg='lightgrey')
-        self.remove_vehicle_button.grid(row=2, column=1, pady=5, sticky='e')
+        self.remove_vehicle_button.grid(row=1, column=1, padx=10, pady=10)
 
         self.add_maintenance_button = tk.Button(self.root, text="Add Maintenance", command=self.add_maintenance, bg='lightgrey')
-        self.add_maintenance_button.grid(row=3, column=1, pady=5, sticky='e')
+        self.add_maintenance_button.grid(row=1, column=2, padx=10, pady=10)
 
         self.remove_maintenance_button = tk.Button(self.root, text="Remove Maintenance", command=self.remove_maintenance, bg='lightgrey')
-        self.remove_maintenance_button.grid(row=4, column=1, pady=5, sticky='e')
+        self.remove_maintenance_button.grid(row=2, column=0, padx=10, pady=10)
 
         self.add_call_schedule_button = tk.Button(self.root, text="Add Call Schedule", command=self.add_call_schedule, bg='lightgrey')
-        self.add_call_schedule_button.grid(row=5, column=1, pady=5, sticky='e')
+        self.add_call_schedule_button.grid(row=2, column=1, padx=10, pady=10)
 
         self.remove_call_schedule_button = tk.Button(self.root, text="Remove Call Schedule", command=self.remove_call_schedule, bg='lightgrey')
-        self.remove_call_schedule_button.grid(row=6, column=1, pady=5, sticky='e')
+        self.remove_call_schedule_button.grid(row=2, column=2, padx=10, pady=10)
 
         self.view_vehicle_button = tk.Button(self.root, text="View Vehicle Details", command=self.view_vehicle, bg='lightgrey')
-        self.view_vehicle_button.grid(row=7, column=1, pady=5, sticky='e')
+        self.view_vehicle_button.grid(row=3, column=0, padx=10, pady=10)
 
         self.view_call_schedule_button = tk.Button(self.root, text="View Call Schedule Details", command=self.view_call_schedule, bg='lightgrey')
-        self.view_call_schedule_button.grid(row=8, column=1, pady=5, sticky='e')
+        self.view_call_schedule_button.grid(row=3, column=1, padx=10, pady=10)
 
         self.view_maintenance_button = tk.Button(self.root, text="View Maintenance Records", command=self.view_maintenance, bg='lightgrey')
-        self.view_maintenance_button.grid(row=9, column=1, pady=5, sticky='e')
+        self.view_maintenance_button.grid(row=3, column=2, padx=10, pady=10)
 
     def add_vehicle(self):
         self.add_vehicle_window = tk.Toplevel(self.root)
