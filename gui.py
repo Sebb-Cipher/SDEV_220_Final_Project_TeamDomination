@@ -34,7 +34,7 @@ class FleetManagementApp:
         self.add_maintenance_button.grid(row=1, column=2, padx=10, pady=10)
 
         self.remove_maintenance_button = tk.Button(self.root, text="Remove Maintenance", command=self.remove_maintenance, bg='lightgrey')
-        self.remove_maintenance_button.grid(row=2, column=0, padx=10, pady=10)
+        self.remove_maintenance_button.grid(row=2, column=0, padx=10, pady=300) # Might want to reduce this, a little too much for my taste 
 
         self.add_call_schedule_button = tk.Button(self.root, text="Add Call Schedule", command=self.add_call_schedule, bg='lightgrey')
         self.add_call_schedule_button.grid(row=2, column=1, padx=10, pady=10)
