@@ -21,6 +21,7 @@ class FleetManagementApp:
         # Configure grid columns to expand
         for i in range(3):
             self.root.grid_columnconfigure(i, weight=1)
+            #indentation? This seems to be part of the Configure grid columns to expand
         self.root.grid_rowconfigure(1, weight=1)
 
         # Arrange buttons in a 3x3 grid
