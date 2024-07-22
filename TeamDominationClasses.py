@@ -4,6 +4,7 @@ import sqlite3
 
 class Vehicle:
     def __init__(self, vehicle_id, make, model, year, status='Available'):
+        #possible typo with vehcile_id
         self.vehcile_id = vehicle_id
         self.make = make
         #is mdoel a typo?
