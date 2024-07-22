@@ -1,7 +1,23 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
+import sqlite3
+from sqlalchemy import create_engine, text
+import sqlalchemy as sa
 from TeamDominationClasses import Vehicle, Maintenance, CallSchedule, FleetManagementSystem
+
+#user is root because that's a default user and none were set
+user = 'root'
+#pw wasn't set so it's just a blank via ''
+pw = ''
+db = 'booksss'
+engine = create_engine('sqlite:///fleet_management.db'.format(user=user,pw=pw,db=db))
+
+with engine.connect() as conn:
+    result = conn.execute(text('SELECT title FROM fleet_management ORDER BY title DESC;'))
+
+for row in result:
+    print(row)
 
 class FleetManagementApp:
     def __init__(self, root):
