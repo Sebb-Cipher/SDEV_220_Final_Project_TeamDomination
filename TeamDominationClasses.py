@@ -6,6 +6,7 @@ class Vehicle:
     def __init__(self, vehicle_id, make, model, year, status='Available'):
         self.vehcile_id = vehicle_id
         self.make = make
+        #is mdoel a typo?
         self.mdoel = model
         self.year = year
         self.status = status
