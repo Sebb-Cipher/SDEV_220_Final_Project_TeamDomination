@@ -31,6 +31,9 @@ class Maintenance:
     def complete_maintenance(self):
         self.completed = True
 
+#Class representing calls from clients
+#Attributes: call_id - id number of the client call, customer_name - name of client
+# date - ?, time - ?, vehicle_id - vehicle_id of vehicle assigned to call
 class CallSchedule:
     def __init__(self, call_id, customer_name, date, time, vehicle_id=None):
         self.call_id = call_id
@@ -39,7 +42,7 @@ class CallSchedule:
         self.time = time
         self.vehicle_id = vehicle_id
 
-
+    #Method to assign a vehicle to a specific call
     def assign_vehicle(self, vehicle_id):
         self.vehicle_id = vehicle_id
 
