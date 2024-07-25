@@ -235,20 +235,24 @@ class FleetManagementApp(tk.Tk):
         self.withdraw()  # Hide the main window
         self.login_window = LoginWindow(self)
 
+    # Quit pop up window
     def on_closing(self):
         if messagebox.askokcancel("Quit", "Do you want to quit?"):
             self.destroy()
 
+    # Setup for main user interface
     def create_main_interface(self):
         self.notebook = ttk.Notebook(self)
         self.notebook.pack(expand=True, fill="both")
 
+        # Individual tabs
         self.create_dashboard_tab()
         self.create_vehicles_tab()
         self.create_maintenance_tab()
         self.create_schedule_tab()
         self.create_inventory_tab()
 
+    # Dashboard tab
     def create_dashboard_tab(self):
         dashboard_frame = ttk.Frame(self.notebook)
         self.notebook.add(dashboard_frame, text="Dashboard")
@@ -297,6 +301,7 @@ class FleetManagementApp(tk.Tk):
 
         ttk.Button(schedule_frame, text="Logout", command=self.logout).pack(side="bottom", padx=5)
 
+    # Refresh tab methods with updated data
     def refresh_dashboard(self):
         self.refresh_vehicle_dashboard()
         self.refresh_maintenance_dashboard()
@@ -326,6 +331,7 @@ class FleetManagementApp(tk.Tk):
         for row in cursor.fetchall():
             self.schedule_tree_dashboard.insert('', 'end', values=row)
 
+    # Vehicle List tab
     def create_vehicles_tab(self):
         vehicles_frame = ttk.Frame(self.notebook)
         self.notebook.add(vehicles_frame, text="Vehicles")
@@ -353,6 +359,7 @@ class FleetManagementApp(tk.Tk):
         # Populate the treeview with vehicles from the database
         self.refresh_vehicle_list()
 
+    # Maintenance Record tab
     def create_maintenance_tab(self):
         maintenance_frame = ttk.Frame(self.notebook)
         self.notebook.add(maintenance_frame, text="Maintenance")
@@ -380,6 +387,7 @@ class FleetManagementApp(tk.Tk):
         # Populate the treeview with maintenance records from the database
         self.refresh_maintenance_list()
 
+    # Schedule tab
     def create_schedule_tab(self):
         schedule_frame = ttk.Frame(self.notebook)
         self.notebook.add(schedule_frame, text="Call Schedules")
@@ -408,6 +416,7 @@ class FleetManagementApp(tk.Tk):
         # Populate the treeview with call schedules from the database
         self.refresh_schedule_list()
 
+    # Add schedule popup
     def add_call_schedule_popup(self):
         popup = tk.Toplevel()
         popup.title("Add Call Schedule")
@@ -453,6 +462,7 @@ class FleetManagementApp(tk.Tk):
 
         tk.Button(popup, text="Add", command=add_call_schedule).grid(row=5, column=0, columnspan=2, pady=10)
 
+    # Assign vehicle popup
     def assign_vehicle_popup(self):
         selected_item = self.schedule_tree.selection()
         if selected_item:
@@ -528,11 +538,13 @@ class FleetManagementApp(tk.Tk):
         checklist_popup.wait_window()
         return result['selected']
 
+    # Logout button
     def logout(self):
         self.current_user = None
         self.withdraw()
         self.login_window = LoginWindow(self)
 
+    # Inventory Tab
     def create_inventory_tab(self):
         inventory_frame = ttk.Frame(self.notebook)
         self.notebook.add(inventory_frame, text="Inventory")
@@ -559,7 +571,8 @@ class FleetManagementApp(tk.Tk):
                 self.inventory_tree.delete(row)
             for item, quantity in self.fleet_system.inventory.items.items():
                 self.inventory_tree.insert('', 'end', values=(item, quantity))
-
+    
+    # Restock button popup
     def restock_item_popup(self):
         popup = tk.Toplevel()
         popup.title("Restock Item")
@@ -610,6 +623,7 @@ class FleetManagementApp(tk.Tk):
         for row in cursor.fetchall():
             self.schedule_tree.insert('', 'end', values=row)
 
+    # Add vehicle button popup
     def add_vehicle_popup(self):
         popup = tk.Toplevel()
         popup.title("Add Vehicle")
@@ -637,6 +651,7 @@ class FleetManagementApp(tk.Tk):
 
         tk.Button(popup, text="Add", command=add_vehicle).grid(row=4, column=0, columnspan=2, pady=10)
 
+    # Remove vehicle method
     def remove_vehicle(self):
         selected_item = self.vehicle_tree.selection()
         if selected_item:
@@ -644,6 +659,7 @@ class FleetManagementApp(tk.Tk):
             self.fleet_system.remove_vehicle(vehicle_id)
             self.refresh_vehicle_list()
 
+    # Update vehicle status button popup
     def update_vehicle_status(self):
         selected_item = self.vehicle_tree.selection()
         if selected_item:
@@ -673,6 +689,7 @@ class FleetManagementApp(tk.Tk):
 
             tk.Button(popup, text="Update", command=update_status).grid(row=1, column=0, columnspan=2, pady=10)
 
+    # Add maintenance button popup
     def add_maintenance_popup(self):
         popup = tk.Toplevel()
         popup.title("Add Maintenance Record")
@@ -712,6 +729,7 @@ class FleetManagementApp(tk.Tk):
 
         tk.Button(popup, text="Add", command=add_maintenance).grid(row=3, column=0, columnspan=2, pady=10)
 
+    # Remove maintenance method
     def remove_maintenance_record(self):
         selected_item = self.maintenance_tree.selection()
         if selected_item:
@@ -719,6 +737,7 @@ class FleetManagementApp(tk.Tk):
             self.fleet_system.remove_maintenance_record(maintenance_id)
             self.refresh_maintenance_list()
 
+    # Complete maintenance method
     def complete_maintenance_record(self):
         selected_item = self.maintenance_tree.selection()
         if selected_item:
@@ -726,6 +745,7 @@ class FleetManagementApp(tk.Tk):
             self.fleet_system.complete_maintenance_record(maintenance_id)
             self.refresh_maintenance_list()
 
+    # Add call button popup
     def add_call_schedule_popup(self):
         popup = tk.Toplevel()
         popup.title("Add Call Schedule")
@@ -767,6 +787,7 @@ class FleetManagementApp(tk.Tk):
 
         tk.Button(popup, text="Add", command=add_call_schedule).grid(row=5, column=0, columnspan=2, pady=10)
 
+    # Remove call
     def remove_call_schedule(self):
         selected_item = self.schedule_tree.selection()
         if selected_item:
@@ -774,6 +795,7 @@ class FleetManagementApp(tk.Tk):
             self.fleet_system.remove_call_schedule(call_id)
             self.refresh_schedule_list()
 
+    # Assign vehicle popup
     def assign_vehicle_popup(self):
         selected_item = self.schedule_tree.selection()
         if selected_item:
